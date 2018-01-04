@@ -52,8 +52,7 @@ body
 	height: auto
 
 h5
-	margin-top: 15px
-	margin-bottom: 5px
+	margin: 5px 0px
 	font-weight: 700
 
 p
@@ -63,14 +62,38 @@ p
 	display: flex
 	max-width: 500px
 	margin: auto
+	height: 100%
 
 .container
 	display: flex
 	flex-flow: column wrap
 	width: 100%
+	margin: auto
 
 #player
 	width: 100%
+
+.song
+	cursor: pointer
+	padding: 10px
+	border-radius: 2px
+	transition: 500ms all ease
+	height: 70px
+	&:hover
+		background-color: #f1f1f1
+
+.selected
+	background-color: #bdbdbd
+	&:hover
+		background-color: #bdbdbd
+	&:after
+		content: "Playing"
+		display: flex
+		margin-left: 84%
+		margin-top: -5%
+		font-style: italic
+		font-weight: 600
+
 
 
 @import "media" // Всегда в конце

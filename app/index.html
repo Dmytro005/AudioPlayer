@@ -32,14 +32,15 @@
 	<div class="wr">
 		<div class="container">
 			<ul>
-				<li ng-repeat="Song in Songs">
+				<li ng-repeat="Song in Songs track by $index" ng-click="Play($index, Song.src)" class="song" >
+					<!-- <img src="" alt=""> -->
 					<h5>{{Song.artist}}</h5>
 					<p>{{Song.name}}</p>
 				</li>
 			</ul>
 			
 		<audio id="player" controls>
-			<source src="" type="audio/mp3">
+			<source src="" type="">
 		</audio>
 		</div>
 	</div>

@@ -60,7 +60,7 @@ p
 
 .wr
 	display: flex
-	max-width: 500px
+	max-width: 300px
 	margin: auto
 	height: 100%
 
@@ -78,7 +78,7 @@ p
 	padding: 10px
 	border-radius: 2px
 	transition: 500ms all ease
-	height: 70px
+	height: 60px
 	&:hover
 		background-color: #f1f1f1
 
@@ -90,10 +90,41 @@ p
 		content: "Playing"
 		display: flex
 		margin-left: 84%
-		margin-top: -5%
+		margin-top: -9%
 		font-style: italic
 		font-weight: 600
 
+//Timeline
+#UserTime 
+	-webkit-appearance: none
+	width: 100%
+	height: 5px
+	background: #d3d3d3
+	outline: none
+	opacity: 0.7
+	-webkit-transition: 0.5s
+	transition: opacity 0.5s
+
+
+#UserTime:hover 
+	opacity: 1
+
+
+#UserTime::-webkit-slider-thumb 
+	-webkit-appearance: none
+	appearance: none
+	width: 25px
+	height: 25px
+	background: $accent
+	border-radius: 50%
+	cursor: pointer
+
+
+#UserTime::-moz-range-thumb 
+	width: 25px
+	height: 15px
+	background: #4CAF50
+	cursor pointer
 
 
 @import "media" // Всегда в конце

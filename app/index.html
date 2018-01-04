@@ -32,8 +32,7 @@
 	<div class="wr">
 		<div class="container">
 			<ul>
-				<li ng-repeat="Song in Songs track by $index" ng-click="Play($index, Song.src)" class="song" >
-					<!-- <img src="" alt=""> -->
+				<li ng-repeat="Song in Songs track by $index" ng-click="PlaySong($index, Song.src)" class="song" >
 					<h5>{{Song.artist}}</h5>
 					<p>{{Song.name}}</p>
 				</li>
@@ -42,6 +41,14 @@
 		<audio id="player" controls>
 			<source src="" type="">
 		</audio>
+		<p id="CurrentTime">{{CurrentTime}}</p>
+		<p id="DurationTime">{{CurrentDuration}}</p>
+		<input type="range" id="UserTime" 
+		 ng-model="Time" 
+		 ng-mousedown="SetTime()" 
+		 ng-mouseup="ApplyTime()">
+
+			<button id="PlayPause" ng-click="PlayPause()" >Play</button>
 		</div>
 	</div>
 

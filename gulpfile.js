@@ -21,7 +21,7 @@ gulp.task('common-js', function() {
 		'app/js/common.js',
 		])
 	.pipe(concat('common.min.js'))
-	.pipe(uglify())
+	// .pipe(uglify())
 	.pipe(gulp.dest('app/js'));
 });
 
@@ -31,7 +31,7 @@ gulp.task('js', ['common-js'], function() {
 		'app/js/common.min.js' // Always in the end
 		])
 	.pipe(concat('scripts.min.js'))
-	.pipe(uglify()) // Comment optionaly
+	//.pipe(uglify()) // Comment optionaly
 	.pipe(gulp.dest('app/js'))
 	.pipe(browserSync.reload({stream: true}));
 });

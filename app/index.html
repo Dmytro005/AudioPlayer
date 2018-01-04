@@ -29,11 +29,21 @@
 </head>
 
 <body ng-controller="AudioPlayerCtrl" >
-	
+	<div class="wr">
+		<div class="container">
+			<ul>
+				<li ng-repeat="Song in Songs">
+					<h5>{{Song.artist}}</h5>
+					<p>{{Song.name}}</p>
+				</li>
+			</ul>
+			
+		<audio id="player" controls>
+			<source src="" type="audio/mp3">
+		</audio>
+		</div>
+	</div>
 
-	<audio id="player" controls>
-		<source src="audio/BenHoward–AllIsNowHarmed.mp3" type="audio/mp3">
-	</audio>
 
 	<link rel="stylesheet" href="css/main.min.css">
 	<script src="js/scripts.min.js"></script>

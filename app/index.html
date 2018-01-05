@@ -31,7 +31,7 @@
 <body ng-controller="AudioPlayerCtrl" >
 	<div class="wr">
 		<div class="container">
-			<ul>
+			<ul ng-cloak>
 				<li ng-repeat="Song in Songs track by $index" ng-click="PlaySong($index)" class="song" >
 					<h5>{{Song.artist}}</h5>
 					<p>{{Song.name}}</p>
@@ -41,19 +41,25 @@
 		<audio id="player">
 			<source src="" type="">
 		</audio>
-		<p id="CurrentTime">{{CurrentTime}}</p>
-		<p id="DurationTime">{{CurrentDuration}}</p>
-		<input type="range" id="UserTime" 
-		 ng-model="Time" 
-		 ng-mousedown="SetTime()" 
-		 ng-mouseup="ApplyTime()">
 
-		 <input type="range" 
-		 ng-model="Mute"
-		 min="0" 
-		 max="1"
-		 step="0.01" 
-		 ng-change="SetMute()" >
+		<div class="controls">
+			<p id="CurrentTime">{{CurrentTime}}</p>
+
+			<p id="DurationTime">{{CurrentDuration}}</p>
+
+			<input type="range" id="UserTime" 
+			ng-model="Time" 
+	
+			ng-mousedown="SetTime()" 
+			ng-mousemove="ApplyCurrnetTime()"
+			ng-mouseup="ApplyTime()">
+
+			<input type="range" 
+			ng-model="Mute"
+			min="0" 
+			max="1"
+			step="0.01" 
+			ng-change="SetMute()" >
 
 
 			<button id="PlayPause" ng-click="PlayPause()" >Play</button>
@@ -62,7 +68,9 @@
 
 			<button id="PlayPrevious"
 			ng-click="PlaySong(CurrentSong-1)"
-			>Previous</button>
+			>Previous</button>	
+		</div>
+
 		</div>
 	</div>
 

@@ -40,6 +40,9 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 	//Current song order index
 	$scope.CurrentSong = 0;
 
+	//if we click on timeline
+	$scope.Clicked = false
+
 	//Array of songs
 	$scope.Songs = Songs;
 
@@ -72,8 +75,8 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 
   	// PLay songs by index
 	$scope.PlaySong = function (index) {
-		console.log($scope.Songs.length);
-		console.log(index);
+		// console.log($scope.Songs.length);
+		// console.log(index);
 
 		//If it`s the last song in playlist play the first song
 		if (index == $scope.Songs.length) {
@@ -85,9 +88,12 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 			index = $scope.Songs.length - 1;
 		}
 
+		//Load song
 		$("#player").attr('src', AudioFolder+$scope.Songs[index].src+AudioFormat);
+
 		$("#player")[0].play();	
 
+		//Toggle class
 		$(`.song:eq(${$scope.CurrentSong})`).removeClass('selected');
 		$(`.song:eq(${index})`).addClass('selected');
 		$scope.CurrentSong = index;
@@ -105,28 +111,38 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 
 	//update time
 	$("#player").on("timeupdate", ()=>{
-		$scope.$apply(function() { 
-			$scope.Time = player.currentTime;
-			$scope.CurrentTime = formatTime(player.currentTime);
-			$scope.CurrentDuration = formatTime(player.duration);
-
-			$("#UserTime").attr({
-				"max": player.duration
-			});
-
+		// diaply duration
+		$("#UserTime").attr({
+			"max": player.duration
 		});
+		if (player.played){
+			$scope.$apply(function() { 
+				$scope.Time = player.currentTime;
+				$scope.CurrentTime = formatTime($scope.Time);
+				$scope.CurrentDuration = formatTime(player.duration);
+			});
+		}
 
 	});
 
+	$scope.ApplyCurrnetTime = function () {
+		if($scope.Clicked){
+			$scope.CurrentTime = formatTime($scope.Time);
+		}
+	}
+
 	// Touch the range chouse the time
 	$scope.SetTime = function () {
+		$scope.Clicked = true
 		$("#player")[0].pause();
-		$scope.CurrentTime = formatTime($scope.Time);
+		// $scope.$apply(function() { 
+		// });
 	}
 	// Leave the range and play
 	$scope.ApplyTime = function() {
 		player.currentTime = $scope.Time;
 		$("#player")[0].play();
+		$scope.Clicked = false
 	}
 
 	// PLay pasue toogling

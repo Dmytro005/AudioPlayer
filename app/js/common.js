@@ -120,7 +120,7 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 			index = $scope.Songs.length - 1;
 		}		
 		//Select the background
-		$(".background").css("background-image",`url(../img/backgrounds/${$scope.Songs[index].artist.replace(/\s/g,'') }.jpg)` );
+		$(".background").css("background-image",`url(img/backgrounds/${$scope.Songs[index].artist.replace(/\s/g,'') }.jpg)` );
 
 		//Load song
 		$("#player").attr('src', AudioFolder+$scope.Songs[index].src+AudioFormat);

@@ -118,8 +118,7 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 		// If it`s first song in playlist play the last song
 		if (index == -1) {
 			index = $scope.Songs.length - 1;
-		}
-		
+		}		
 		//Select the background
 		$(".background").css("background-image",`url(../img/backgrounds/${$scope.Songs[index].artist.replace(/\s/g,'') }.jpg)` );
 
@@ -194,7 +193,6 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 		if(PLayAtFirst){
 			// Play first song
 			$scope.PlaySong(0)
-
 			return true
 		}
 
@@ -202,16 +200,14 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 		if(player.paused){
 			$("#player")[0].play();	
 			$scope.IsPlaying = true;
-			console.log("PLay");
-
+			// console.log("PLay");
 			return true
 		}
 
 		// if played -> pause
 		if(player.played){
 			$("#player")[0].pause();
-			console.log("Pause");
-
+			// console.log("Pause");
 			return false
 		}
 	}
@@ -219,5 +215,15 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 	// Mute tettings
 	$scope.SetMute = function () {
 		player.volume = $scope.Mute;
+	}
+
+	$scope.MuteDisabled = function () {
+		$scope.Mute	= 0;
+		$scope.SetMute();
+	}
+
+	$scope.MuteEnable = function () {
+		$scope.Mute	= 1;
+		$scope.SetMute();
 	}
 })

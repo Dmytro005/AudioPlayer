@@ -35,16 +35,13 @@
 			
 			
 		<div class="card">
-			<div class="front">
+			<div class="playlist">
 				<ul ng-cloak>
 					<li ng-repeat="Song in Songs track by $index" ng-click="PlaySong($index)" class="song" >
 						<h5>{{Song.artist}}</h5>
 						<p>{{Song.name}}</p>
 					</li>
 				</ul>
-			</div>
-			<div class="back">
-				<img src="" alt="">
 			</div>
 		</div>
 
@@ -99,7 +96,8 @@
 		</div>
 	</div>
 	
-	<div class="background"></div>
+	<div class="background">
+	</div>
 
 	<link rel="stylesheet" href="css/main.min.css">
 	<script src="js/scripts.min.js"></script>

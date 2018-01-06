@@ -82,7 +82,7 @@ p
 	z-index: -1
 	filter: blur(10px)
 	transition: 3s all ease-in-out
-	opacity: 0.5
+	// opacity: 0.5
 
 .container
 	display: flex
@@ -96,8 +96,7 @@ p
 	padding: 10px
 	.card
 		height: 400px
-		.front
-
+		.playlist
 			overflow: scroll
 			overflow-x: hidden
 			height: 100%
@@ -282,5 +281,20 @@ button
 	background: $red
 	opacity: 0.2
 	border-radius: 10px
+
+// ::-moz-scrollbar 
+// 	width: 5px
+// 	padding-right: 5px
+
+// /* Track */
+// ::-moz-scrollbar-track 
+// 	border-radius: 10px
+
+ 
+// /* Handle */
+// ::-moz-scrollbar-thumb 
+// 	background: $red
+// 	opacity: 0.2
+// 	border-radius: 10px
 
 @import "media" // Всегда в конце

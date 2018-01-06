@@ -119,8 +119,11 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 		if (index == -1) {
 			index = $scope.Songs.length - 1;
 		}		
+
+		let src = $scope.Songs[index].artist.replace(/\s/g,'');
+
 		//Select the background
-		$(".background").css("background-image",`url(img/backgrounds/${$scope.Songs[index].artist.replace(/\s/g,'') }.jpg)` );
+		$(".background").css("background-image",`url(img/backgrounds/${src}.jpg)` );
 
 		//Load song
 		$("#player").attr('src', AudioFolder+$scope.Songs[index].src+AudioFormat);
@@ -226,4 +229,16 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 		$scope.Mute	= 1;
 		$scope.SetMute();
 	}
+
+	//Preload titles
+	function Preload(){
+		images = [];
+		for (var i = 0; i <= $scope.Songs.length - 1; i++) {
+			var src = `https://dmytro005.github.io/AudioPlayer/app/img/backgrounds/${$scope.Songs[i].artist}.jpg`.replace(/\s/g,'');
+			images[i] = new Image();
+			images[i].src = src;
+		}
+	}
+	Preload();
+	
 })

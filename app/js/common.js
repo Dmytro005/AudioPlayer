@@ -1,5 +1,4 @@
 var app = angular.module("AudioPlayerApp", []);
-
 var Songs = [
 	{
 		artist: "Imagine Dragons",
@@ -25,6 +24,34 @@ var Songs = [
 		artist: "Ben Howard",
 		name:"Promise",
 		src: "Ben Howard – Promise"
+	},
+	{
+		artist: "The Seige",
+		name:"Prime",
+		src: "The Seige – Prime"
+	},
+
+	{
+		artist: "The Seige",
+		name:"Animal",
+		src: "The Seige – Animal"
+	},
+
+	{
+		artist: "The Seige",
+		name:"Ctrl+Alt+Del",
+		src: "The Seige – Ctrl Alt Del Explicit"
+	},
+
+	{
+		artist: "Coldplay",
+		name:"Adventure Of A Lifetime",
+		src: "Coldplay – Adventure Of A Lifetime"
+	}
+	,{
+		artist: "ACDC",
+		name:"Back in Black",
+		src: "ACDC - Back in Black"
 	}
 
 ]
@@ -45,6 +72,9 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 
 	//Array of songs
 	$scope.Songs = Songs;
+
+	$scope.CurrentTime = "00:00"
+	$scope.CurrentDuration = "00:00"
 
 	var PLayAtFirst = true;
 
@@ -74,9 +104,11 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
   	}
 
   	// PLay songs by index
-	$scope.PlaySong = function (index) {
+	$scope.PlaySong = (index) => {
 		// console.log($scope.Songs.length);
 		// console.log(index);
+		$("#PlayPause").addClass('pause-img');
+
 
 		//If it`s the last song in playlist play the first song
 		if (index == $scope.Songs.length) {
@@ -87,6 +119,9 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 		if (index == -1) {
 			index = $scope.Songs.length - 1;
 		}
+		
+		//Select the background
+		$(".background").css("background-image",`url(../img/backgrounds/${$scope.Songs[index].artist.replace(/\s/g,'') }.jpg)` );
 
 		//Load song
 		$("#player").attr('src', AudioFolder+$scope.Songs[index].src+AudioFormat);
@@ -96,6 +131,7 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 		//Toggle class
 		$(`.song:eq(${$scope.CurrentSong})`).removeClass('selected');
 		$(`.song:eq(${index})`).addClass('selected');
+
 		$scope.CurrentSong = index;
 
 		PLayAtFirst = false;
@@ -104,7 +140,7 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 
 
 	// play next song in the end of play list
-	$("#player").on('ended', function() {
+	$("#player").on('ended', () => {
 		$scope.PlaySong($scope.CurrentSong+1);
 	});
 
@@ -125,28 +161,34 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 
 	});
 
-	$scope.ApplyCurrnetTime = function () {
+	$scope.ApplyCurrnetTime = () => {
 		if($scope.Clicked){
 			$scope.CurrentTime = formatTime($scope.Time);
 		}
 	}
 
 	// Touch the range chouse the time
-	$scope.SetTime = function () {
+	$scope.SetTime = () => {
 		$scope.Clicked = true
 		$("#player")[0].pause();
+		//Remove icon
+		$("#PlayPause").removeClass('pause-img');
 		// $scope.$apply(function() { 
 		// });
 	}
 	// Leave the range and play
-	$scope.ApplyTime = function() {
+	$scope.ApplyTime = () => {
 		player.currentTime = $scope.Time;
 		$("#player")[0].play();
+		$("#PlayPause").addClass('pause-img');
 		$scope.Clicked = false
 	}
 
 	// PLay pasue toogling
-	$scope.PlayPause = function() {
+	$scope.PlayPause = () => {
+
+		// Change icon
+		$("#PlayPause").toggleClass('pause-img');
 		
 		// If we play and no one song is selected
 		if(PLayAtFirst){
@@ -172,7 +214,6 @@ app.controller("AudioPlayerCtrl", function ($scope, $interval) {
 
 			return false
 		}
-		
 	}
 
 	// Mute tettings
